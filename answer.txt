@@ -166,3 +166,7 @@ Open Docker Desktop
 Pods
 Deployments
 Services
+
+
+d okva
+ethavuthu na mag pannu
