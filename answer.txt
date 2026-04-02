@@ -170,3 +170,5 @@ Services
 
 d okva
 ethavuthu na mag pannu
+
+after writing deplyment.yaml, index.html and dockerfile in manage jenkins what should i do after pipeline code?
