@@ -1,1 +1,168 @@
-hello prathusha
+1. Create Resume Web Page (HTML)
+
+Create a file: index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Resume</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        h1 { color: #2c3e50; }
+        .section { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<h1>Your Name</h1>
+<p>Email: your@email.com | Phone: 1234567890</p>
+
+<div class="section">
+    <h2>Objective</h2>
+    <p>To build a career in software development.</p>
+</div>
+
+<div class="section">
+    <h2>Education</h2>
+    <p>B.Tech / B.E - Your College</p>
+</div>
+
+<div class="section">
+    <h2>Skills</h2>
+    <p>HTML, CSS, Java, Python</p>
+</div>
+
+<div class="section">
+    <h2>Projects</h2>
+    <p>Gesture Communication System</p>
+</div>
+
+</body>
+</html>
+✅ 2. Push to GitHub
+Step 1: Create Repo in GitHub
+
+Name it: resume-website
+
+Step 2: Clone into VS Code
+git clone https://github.com/yourusername/resume-website.git
+cd resume-website
+Step 3: Add Files & Push
+git add .
+git commit -m "Initial resume webpage"
+git push origin main
+✅ 3. Containerize using Docker
+
+Create Dockerfile
+
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+Build Docker Image
+docker build -t resume-app .
+Run Container
+docker run -d -p 8080:80 resume-app
+
+👉 Open browser: http://localhost:8080
+
+✅ 4. Push Docker Image
+
+Create account on Docker Hub
+
+docker tag resume-app yourusername/resume-app
+docker push yourusername/resume-app
+✅ 5. Kubernetes Deployment
+
+Create deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resume-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: resume
+  template:
+    metadata:
+      labels:
+        app: resume
+    spec:
+      containers:
+      - name: resume-container
+        image: yourusername/resume-app
+        ports:
+        - containerPort: 80
+
+Create service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: resume-service
+spec:
+  type: NodePort
+  selector:
+    app: resume
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30007
+Apply Kubernetes
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+✅ 6. Jenkins Pipeline Setup
+
+Install Jenkins
+
+Create Pipeline Project
+
+Add this Jenkinsfile in your repo:
+
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/yourusername/resume-website.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t resume-app .'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'No tests for static site'
+            }
+        }
+
+        stage('Push Image') {
+            steps {
+                sh 'docker tag resume-app yourusername/resume-app'
+                sh 'docker push yourusername/resume-app'
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh 'kubectl apply -f deployment.yaml'
+                sh 'kubectl apply -f service.yaml'
+            }
+        }
+    }
+}
+✅ 7. Visualize in Docker Desktop
+
+Open Docker Desktop
+→ Go to Kubernetes tab
+→ You can see:
+
+Pods
+Deployments
+Services
