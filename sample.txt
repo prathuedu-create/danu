@@ -2,3 +2,8 @@ Develop a bio data or resume web page using html and maintain the course code in
 1) clone the repositary into vs code, many any updates, commit and push the changes to the git repositary
 2) containarize the application using docker and prepare it for deployment
 3)configure jenkins to create a pipeline project that builds, tests and deploys the application using Docker and kubernetes and visualise the deployment through docker desktop
+
+
+
+d okva
+ethavuthu na msg pannu
